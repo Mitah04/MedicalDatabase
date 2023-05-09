@@ -1,0 +1,6 @@
+.label {
+    -fx-font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    -fx-font-size: 48px;
+    -fx-text-fill: #2c3e50; /* change the color to your liking */
+    -fx-effect: dropshadow( gaussian , rgba(0,0,0,0.7) , 5,0,0,1 );
+}
