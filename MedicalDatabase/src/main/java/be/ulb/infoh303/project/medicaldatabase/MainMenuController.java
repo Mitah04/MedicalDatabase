@@ -17,11 +17,13 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class MainMenuController implements Initializable {
+public class MainMenuController extends Controller{
 
     private Stage stage;
     private Scene scene;
     private Parent root;
+
+    private String id;
 
     @FXML
     private Label errorLabel;
@@ -34,11 +36,22 @@ public class MainMenuController implements Initializable {
 
     boolean verifyLogin(String userrole, String id){
         // TODO
-        return true;
+
+        boolean res = false;
+
+        if (userrole == "Patient")
+            res = dbManager.verifyPatient(id);
+        else if ( userrole == "Doctor")
+            res = dbManager.verifyDoctor(id);
+        else if ( userrole == "Pharamacist")
+            res = dbManager.verifyPharmacist(id);
+
+        return res;
+
     }
 
     public void login(ActionEvent event) throws IOException {
-        String id = idTxtField.getText();
+        id = idTxtField.getText();
         String userrole = userroleComb.getValue();
 
         if (verifyLogin(userrole, id)){
@@ -46,7 +59,12 @@ public class MainMenuController implements Initializable {
             root = loader.load();
 
            PatientPageController controller = loader.getController();
-           controller.displayID(id);
+           controller.setDataBaseManager(dbManager);
+           controller.setId(id);
+           controller.displayID();
+           controller.displayName();
+
+
 
 
             stage = (Stage) ((Node)event.getSource()).getScene().getWindow();

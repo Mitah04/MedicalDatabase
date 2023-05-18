@@ -1,0 +1,5 @@
+SELECT COUNT(pathology) AS cnt, pathology
+FROM public."Diagnostics"
+GROUP BY pathology
+ORDER BY cnt DESC
+LIMIT 1;

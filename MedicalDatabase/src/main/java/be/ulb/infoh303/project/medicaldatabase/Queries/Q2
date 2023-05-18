@@ -1,0 +1,3 @@
+SELECT p."pathology"
+FROM public."Pathologies" AS p, public."Doctors" AS d
+WHERE p."speciality" = 'Oncologie';

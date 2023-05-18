@@ -9,7 +9,8 @@ import javafx.scene.layout.StackPane;
 
 import java.io.IOException;
 
-public class PatientPageController {
+public class PatientPageController extends Controller {
+
 
     @FXML
     private Label idLabel;
@@ -20,13 +21,21 @@ public class PatientPageController {
     @FXML
     private StackPane contentArea;
 
-    public void displayID(String id){
+    public void displayID(){
         idLabel.setText(id);
     }
 
+    public void displayName() { nameLabel.setText(dbManager.getPatientName(id));}
+
     @FXML
     void information(ActionEvent event) throws IOException {
-        Parent fxml = FXMLLoader.load(getClass().getResource("patient-info.fxml"));
+        FXMLLoader loader= new FXMLLoader(getClass().getResource("patient-info.fxml"));
+        Parent fxml = loader.load();
+
+        PatientInfoController controller = loader.getController();
+        controller.setDataBaseManager(dbManager);
+        controller.setId(id);
+
         contentArea.getChildren().removeAll();
         contentArea.getChildren().setAll(fxml);
     }
@@ -37,5 +46,6 @@ public class PatientPageController {
         contentArea.getChildren().removeAll();
         contentArea.getChildren().setAll(fxml);
     }
+
 
 }

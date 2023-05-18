@@ -1,0 +1,4 @@
+SELECT m."Commercial_Name"
+FROM public."Medecines" AS m 
+WHERE m."DCI" = 'BEVACIZUMAB'
+ORDER BY m."Packaging";
